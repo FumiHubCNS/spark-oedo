@@ -1,17 +1,38 @@
-/*
-!.gitignore
-!setup.sh
-!__init__.py
-!requirements.txt
-!/map_files/
-!/sparkOEDOModules/
-!sparkOEDOModules.zip
-!/prm
-!/kafka/
-!/hist/
-!/waveform/
-!/scala_package/
-!/bin/
-*.pyc
-!SparkOedo.py
-!environment.yaml
+## original 
+src/spark_oedo/*
+!src/spark_oedo.gitignore
+!src/spark_oedosetup.sh
+!src/spark_oedo__init__.py
+!src/spark_oedorequirements.txt
+!src/spark_oedo/map_files/
+!src/spark_oedo/sparkOEDOModules/
+!src/spark_oedosparkOEDOModules.zip
+!src/spark_oedo/prm
+!src/spark_oedo/kafka/
+!src/spark_oedo/hist/
+!src/spark_oedo/waveform/
+!src/spark_oedo/scala_package/
+!src/spark_oedo/bin/
+src/spark_oedo*.pyc
+!src/spark_oedoSparkOedo.py
+!src/spark_oedoenvironment.yaml
+ 
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.vim
+.vscode
+.*
+
+# Mac OS 
+.DS_Store
+
+# aliases
+rawdata

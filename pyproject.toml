@@ -21,6 +21,7 @@ dependencies = [
   "kafka>=1.3.5",
   "kafka-python>=2.3.0",
   "torch>=2.10.0",
+  "marimo-lib"
 ]
 
 [tool.uv.sources]

@@ -16,7 +16,6 @@ def create_spark_session(
     script_dir = Path(__file__).parent.parent
 ):
     """Create Spark session with appropriate configuration"""
-    
     # Find the JAR file automatically
     jar_path = find_jar_path(script_dir)
     print_jar_info(jar_path)
@@ -43,8 +42,6 @@ def call_scala_converter(
     script_dir = Path(__file__).parent.parent
 ):
     """Call the Scala StreamingV1ToParquet application via spark-submit"""
-
-    script_dir = Path(__file__).parent.parent
     jar_path = find_jar_path(script_dir)
 
     # Build spark-submit command targeting StreamingV1ToParquet

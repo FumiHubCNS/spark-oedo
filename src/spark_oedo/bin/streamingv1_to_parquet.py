@@ -11,11 +11,13 @@ from pathlib import Path
 from pyspark.sql import SparkSession
 from .spark_oedo_utils import find_jar_path, print_jar_info
 
-def create_spark_session(app_name="StreamingV1 to Parquet Converter"):
+def create_spark_session(
+    app_name="StreamingV1 to Parquet Converter",
+    script_dir = Path(__file__).parent.parent
+):
     """Create Spark session with appropriate configuration"""
     
     # Find the JAR file automatically
-    script_dir = Path(__file__).parent.parent
     jar_path = find_jar_path(script_dir)
     print_jar_info(jar_path)
     
@@ -34,7 +36,12 @@ def create_spark_session(app_name="StreamingV1 to Parquet Converter"):
     spark.sparkContext.setLogLevel("WARN")
     return spark
 
-def call_scala_converter(input_file, output_file, max_blocks=None):
+def call_scala_converter(
+    input_file,
+    output_file,
+    max_blocks=None,
+    script_dir = Path(__file__).parent.parent
+):
     """Call the Scala StreamingV1ToParquet application via spark-submit"""
 
     script_dir = Path(__file__).parent.parent
@@ -79,6 +86,7 @@ Output format:
     parser.add_argument("input_file", help="Input file path")
     parser.add_argument("output_file", help="Output Parquet file path")
     parser.add_argument("--max-blocks", type=int, help="Maximum number of blocks to process")
+    parser.add_argument("--scala-path", type=str, default=None, help="scala package path")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
     args = parser.parse_args()
@@ -98,7 +106,10 @@ Output format:
     print()
     
     try:
-        success = call_scala_converter(args.input_file, args.output_file, args.max_blocks)
+        if args.scala_path is None:
+            args.scala_path = Path(__file__).parent.parent
+
+        success = call_scala_converter(args.input_file, args.output_file, args.max_blocks, args.scala_path)
         
         if success:
             print("\n✓ Conversion completed successfully!")
